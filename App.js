@@ -1,5 +1,4 @@
 import React from 'react';
-import Navigator from './routes/HomeStack';
 import Navigation from './navigation/index';
 
 export default function App() {
