@@ -1,11 +1,23 @@
-import React from 'react';
-import { StyleSheet, View, Image, TextInput, TouchableWithoutFeedback, Keyboard, Button } from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, View, Image, TextInput, TouchableWithoutFeedback, Keyboard, Button, Text, useWindowDimensions } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
+import CustomInput from '../components/CustomInput';
+import { useNavigation } from '@react-navigation/native';
+// import { useForm, Controller } from 'react-hook-form';
 
-export default function Login({ navigation }) {
+export default function Login() {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+
+    const {height} = useWindowDimensions();
+    const navigation = useNavigation();
 
     const pressLoginHandler = () => {
         navigation.navigate('Dashboard')
+    }
+
+    const pressCreateAccount = () => {
+        navigation.navigate('Signup')
     }
 
     return (
@@ -13,29 +25,31 @@ export default function Login({ navigation }) {
             Keyboard.dismiss();
         }}>
             <View style={styles.container}>
-                <Image style={styles.myTransitMTLLogo} source={require('../assets/MyTransitMTL.png')} />
+                <Image style={[styles.myTransitMTLLogo, {height: height * 0.3}]} source={require('../assets/MyTransitMTL.png')} />
 
-                <View style={styles.input}>
-                    <MaterialIcons name="email" size={24} color="black" />
-                    <TextInput 
-                        style={styles.inputText}
-                        placeholder='Email'
-                        selectionColor={'black'}
-                    />    
-                </View>
+                <CustomInput
+                    placeholder="Email"
+                    icon={<MaterialIcons style={styles.icon} name="email" size={24} color="black" />}
+                    value={email}
+                    setValue={setEmail}
+                />
 
-                <View style={styles.input}>
-                    <MaterialIcons name="vpn-key" size={24} color="black" />
-                    <TextInput 
-                        style={styles.inputText}
-                        placeholder='Password'
-                        secureTextEntry={true}
-                        selectionColor={'black'}
-                    />    
-                </View>
+                <CustomInput
+                    placeholder="Password"
+                    icon={<MaterialIcons style={styles.icon} name="vpn-key" size={24} color="black" />}
+                    value={password}
+                    setValue={setPassword}
+                />                
 
                 <View style={styles.buttonContainer}>
                     <Button color='#65C271' title='Log In' onPress={pressLoginHandler} />
+                </View>
+
+                <View style={styles.bottomTextContainer}>
+                    <Text>
+                        Don't have an account?  {""}
+                        <Text style={styles.createAccountText} onPress={pressCreateAccount}>Create One</Text>
+                    </Text>
                 </View>
 
             </View>
@@ -50,19 +64,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
-    input: {
-        flexDirection: 'row',
-    },
-    inputText: {
-        marginBottom: 20,
-        marginLeft: 5,
-        fontWeight: 'bold',
-        width: 170,
-        height: 35,
-        backgroundColor: '#D9D9D9',
-        borderRadius: 10,
-        paddingLeft: 5,
-    },
     myTransitMTLLogo: {
         width: 300,
         height: 300,
@@ -71,5 +72,18 @@ const styles = StyleSheet.create({
         margin: 10,
         borderRadius: 5,
         overflow: 'hidden',
+        width: '50%',
+    },
+    bottomTextContainer: {
+        margin: 10,
+    },
+    icon: {
+        marginTop: 5
+    },
+    createAccount: {
+        
+    },
+    createAccountText: {
+        color: '#0645AD'
     },
 })

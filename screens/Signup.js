@@ -1,65 +1,72 @@
-import React from 'react';
-import { StyleSheet, View, Image, TextInput, TouchableWithoutFeedback, Keyboard, Button} from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, View, Image, TextInput, TouchableWithoutFeedback, Keyboard, Button, useWindowDimensions, Text } from 'react-native';
 import { MaterialIcons, FontAwesome } from '@expo/vector-icons';
+import CustomInput from '../components/CustomInput';
+import { useNavigation } from '@react-navigation/native';
 
 export default function Signup() {
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [passwordRepeat, setPasswordRepeat] = useState('');
+
+    const {height} = useWindowDimensions();
+    const navigation = useNavigation();
+
+
+    const onPressCreateAccount = () => {
+        console.warn("create account pressed");
+        navigation.navigate('Dashboard')
+    }
+
     return (
         <TouchableWithoutFeedback onPress={() => {
             Keyboard.dismiss();
         }}>
             <View style={styles.container}>
-                <Image style={styles.myTransitMTLLogo} source={require('../assets/MyTransitMTL.png')} />
+                <Image style={[styles.myTransitMTLLogo, {height: height * 0.3}]} source={require('../assets/MyTransitMTL.png')} />
 
-                <View style={styles.input}>
-                    <FontAwesome name="user" size={24} color="black" />
-                    <TextInput 
-                        style={styles.inputText}
-                        placeholder='First Name'
-                        selectionColor={'black'}
-                    />    
-                </View>
+                <CustomInput
+                    placeholder="First Name"
+                    icon={<FontAwesome style={styles.icon} name="user" size={24} color="black" />}
+                    value={firstName}
+                    setValue={setFirstName}
+                />
 
-                <View style={styles.input}>
-                    <FontAwesome name="user" size={24} color="black" />
-                    <TextInput 
-                        style={styles.inputText}
-                        placeholder='Last Name'
-                        selectionColor={'black'}
-                    />    
-                </View>
+                <CustomInput
+                    placeholder="Last Name"
+                    icon={<FontAwesome style={styles.icon} name="user" size={24} color="black" />}
+                    value={lastName}
+                    setValue={setLastName}
+                />
 
-                <View style={styles.input}>
-                    <MaterialIcons name="email" size={24} color="black" />
-                    <TextInput 
-                        style={styles.inputText}
-                        placeholder='Email'
-                        selectionColor={'black'}
-                    />    
-                </View>
+                <CustomInput
+                    placeholder="Email"
+                    icon={<MaterialIcons style={styles.icon} name="email" size={24} color="black" />}
+                    value={email}
+                    setValue={setEmail}
+                />
 
-                <View style={styles.input}>
-                    <MaterialIcons name="vpn-key" size={24} color="black" />
-                    <TextInput 
-                        style={styles.inputText}
-                        placeholder='Password'
-                        secureTextEntry={true}
-                        selectionColor={'black'}
-                    />    
-                </View>
+                <CustomInput
+                    placeholder="Password"
+                    icon={<MaterialIcons style={styles.icon} name="vpn-key" size={24} color="black" />}
+                    value={password}
+                    setValue={setPassword}
+                />
 
-                <View style={styles.input}>
-                    <MaterialIcons name="vpn-key" size={24} color="black" />
-                    <TextInput 
-                        style={styles.inputText}
-                        placeholder='Confirm Password'
-                        secureTextEntry={true}
-                        selectionColor={'black'}
-                    />    
-                </View>
+                <CustomInput
+                    placeholder="Repeat Password"
+                    icon={<MaterialIcons style={styles.icon} name="vpn-key" size={24} color="black" />}
+                    value={passwordRepeat}
+                    setValue={setPasswordRepeat}
+                />      
 
                 <View style={styles.buttonContainer}>
-                    <Button color='#65A0C2' title='Create account' />
+                    <Button color='#65A0C2' title='Create account' onPress={onPressCreateAccount} />
                 </View>
+
+                <Text style={styles.policyText}>By registering, you confirm that you accept our Terms of Use and Privacy Policy.</Text>
 
             </View>
         </TouchableWithoutFeedback>        
@@ -73,26 +80,22 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
-    input: {
-        flexDirection: 'row',
-    },
-    inputText: {
-        marginBottom: 20,
-        marginLeft: 5,
-        fontWeight: 'bold',
-        width: 170,
-        height: 35,
-        backgroundColor: '#D9D9D9',
-        borderRadius: 10,
-        paddingLeft: 5,
-    },
     myTransitMTLLogo: {
         width: 300,
         height: 300,
     },
     buttonContainer: {
-        margin: 10,
+        margin: 5,
         borderRadius: 5,
         overflow: 'hidden',
+        width: '50%',
     },
+    icon: {
+        marginTop: 5
+    },
+    policyText: {
+        color: 'gray',
+        width: '80%',
+        margin: 5,
+    }
 })

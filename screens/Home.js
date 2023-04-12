@@ -1,7 +1,10 @@
 import React from 'react';
-import { StyleSheet, View, Button, Image } from 'react-native';
+import { StyleSheet, View, Button, Image, useWindowDimensions } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
-export default function Home({ navigation }) {
+export default function Home() {
+    const {height} = useWindowDimensions();
+    const navigation = useNavigation();
 
     const pressLoginHandler = () => {
         navigation.navigate('Login')
@@ -13,7 +16,7 @@ export default function Home({ navigation }) {
 
     return (
         <View style={styles.container}>
-            <Image style={styles.myTransitMTLLogo} source={require('../assets/MyTransitMTL.png')} />
+            <Image style={[styles.myTransitMTLLogo, {height: height * 0.3}]} source={require('../assets/MyTransitMTL.png')} />
 
             <View style={styles.buttonContainer}>
                 <Button color='#65C271' title='Log In' onPress={pressLoginHandler} />
