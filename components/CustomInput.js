@@ -1,38 +1,55 @@
 import React from 'react';
-import { StyleSheet, View, Image, TextInput, TouchableWithoutFeedback, Keyboard, Button, useWindowDimensions, Text } from 'react-native';
-import { MaterialIcons, FontAwesome } from '@expo/vector-icons';
+import { StyleSheet, View, TextInput, Text } from 'react-native';
+import { Controller } from 'react-hook-form';
 
-export default function CustomInput ({ placeholder, icon, value, setValue }) {
+export default function CustomInput ({ control, name, rules = {}, placeholder, secureTextEntry, icon }) {
     return (
-        <View style={styles.input}>
-            <Text style={styles.icon}>{icon}</Text>
-            <TextInput
-                value={value}
-                onChangeText={setValue}
-                placeholder={placeholder}
-                style={styles.inputText}
-                secureTextEntry={placeholder == "Password" || placeholder == "Repeat Password" ? true : false}
-                selectionColor={'black'}
+        
+            <Controller 
+                control={control}
+                name={name}
+                rules={rules}
+                render={({field: {value, onChange, onBlur}, fieldState: {error}}) => (
+                    <>
+                        <View style={[styles.container, {}]}>
+                            <Text style={styles.icon}>{icon}</Text>
+                            <TextInput 
+                                value={value} 
+                                onChangeText={onChange} 
+                                onBlue={onBlur} 
+                                placeholder={placeholder}
+                                style={[styles.input, {borderColor: error ? 'red' : 'transparent'}]}
+                                secureTextEntry={secureTextEntry}
+                            />
+                        </View>
+                        {error && (
+                                <Text style={{color: 'red', alignSelf: 'center'}}>{error.message || 'Error'}</Text>
+                        )}
+                    </>
+
+                )}
             />
-        </View>
+        
     )
 }
 
 const styles = StyleSheet.create({
-    input: {
+    container: {
         flexDirection: 'row',
+        marginTop: 10,
+        marginBottom: 10
     },
-    inputText: {
-        marginBottom: 20,
-        marginLeft: 5,
+    input: {
+        width: '50%',
+        height: '120%',
         fontWeight: 'bold',
-        width: 170,
-        height: 35,
         backgroundColor: '#D9D9D9',
         borderRadius: 10,
         paddingLeft: 5,
+        borderWidth: 1,
     },
     icon: {
-        marginTop: 5
+        marginTop: 5,
+        marginRight: 5
     },
 })

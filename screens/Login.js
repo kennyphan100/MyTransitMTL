@@ -1,22 +1,23 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Image, TextInput, TouchableWithoutFeedback, Keyboard, Button, Text, useWindowDimensions } from 'react-native';
+import { StyleSheet, View, Image, TouchableWithoutFeedback, Keyboard, Button, Text, useWindowDimensions } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import CustomInput from '../components/CustomInput';
 import { useNavigation } from '@react-navigation/native';
-// import { useForm, Controller } from 'react-hook-form';
+import { useForm, Controller } from 'react-hook-form';
+
+const EMAIL_REGEX = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
 
 export default function Login() {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-
     const {height} = useWindowDimensions();
     const navigation = useNavigation();
 
-    const pressLoginHandler = () => {
+    const {control, handleSubmit, formState: {errors}} = useForm();
+
+    const onLogInPressed = (data) => {
         navigation.navigate('Dashboard')
     }
 
-    const pressCreateAccount = () => {
+    const onCreateAccountPressed = () => {
         navigation.navigate('Signup')
     }
 
@@ -27,28 +28,34 @@ export default function Login() {
             <View style={styles.container}>
                 <Image style={[styles.myTransitMTLLogo, {height: height * 0.3}]} source={require('../assets/MyTransitMTL.png')} />
 
-                <CustomInput
+                <CustomInput 
+                    name="email"
                     placeholder="Email"
+                    control={control}
+                    rules={{
+                        required: 'Email is required',
+                        pattern: {value: EMAIL_REGEX, message: 'Invalid email'},
+                    }}
                     icon={<MaterialIcons style={styles.icon} name="email" size={24} color="black" />}
-                    value={email}
-                    setValue={setEmail}
                 />
 
-                <CustomInput
+                <CustomInput 
+                    name="password"
                     placeholder="Password"
+                    control={control}
+                    rules={{required: 'Password is required'}}
                     icon={<MaterialIcons style={styles.icon} name="vpn-key" size={24} color="black" />}
-                    value={password}
-                    setValue={setPassword}
-                />                
+                    secureTextEntry
+                />
 
                 <View style={styles.buttonContainer}>
-                    <Button color='#65C271' title='Log In' onPress={pressLoginHandler} />
+                    <Button color='#65C271' title='Log In' onPress={handleSubmit(onLogInPressed)} />
                 </View>
 
                 <View style={styles.bottomTextContainer}>
                     <Text>
                         Don't have an account?  {""}
-                        <Text style={styles.createAccountText} onPress={pressCreateAccount}>Create One</Text>
+                        <Text style={styles.createAccountText} onPress={onCreateAccountPressed}>Create One</Text>
                     </Text>
                 </View>
 
@@ -72,7 +79,7 @@ const styles = StyleSheet.create({
         margin: 10,
         borderRadius: 5,
         overflow: 'hidden',
-        width: '50%',
+        width: '60%',
     },
     bottomTextContainer: {
         margin: 10,
@@ -80,10 +87,8 @@ const styles = StyleSheet.create({
     icon: {
         marginTop: 5
     },
-    createAccount: {
-        
-    },
     createAccountText: {
-        color: '#0645AD'
+        color: '#0645AD',
+        textDecorationLine: 'underline'
     },
 })

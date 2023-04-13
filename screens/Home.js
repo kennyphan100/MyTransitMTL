@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Button, Image, useWindowDimensions } from 'react-native';
+import { StyleSheet, View, Button, Image, useWindowDimensions, TextInput } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 export default function Home() {

@@ -1,21 +1,20 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Image, TextInput, TouchableWithoutFeedback, Keyboard, Button, useWindowDimensions, Text } from 'react-native';
+import { StyleSheet, View, Image, TouchableWithoutFeedback, Keyboard, Button, useWindowDimensions, Text } from 'react-native';
 import { MaterialIcons, FontAwesome } from '@expo/vector-icons';
 import CustomInput from '../components/CustomInput';
 import { useNavigation } from '@react-navigation/native';
+import { useForm, Controller } from 'react-hook-form';
+
+const EMAIL_REGEX = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
 
 export default function Signup() {
-    const [firstName, setFirstName] = useState('');
-    const [lastName, setLastName] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [passwordRepeat, setPasswordRepeat] = useState('');
-
     const {height} = useWindowDimensions();
     const navigation = useNavigation();
 
+    const {control, handleSubmit, formState: {errors}, watch } = useForm();
+    const pwd = watch('password');
 
-    const onPressCreateAccount = () => {
+    const onCreateAccountPressed = (data) => {
         console.warn("create account pressed");
         navigation.navigate('Dashboard')
     }
@@ -27,43 +26,61 @@ export default function Signup() {
             <View style={styles.container}>
                 <Image style={[styles.myTransitMTLLogo, {height: height * 0.3}]} source={require('../assets/MyTransitMTL.png')} />
 
-                <CustomInput
+                <CustomInput 
+                    name="firstName"
                     placeholder="First Name"
+                    control={control}
+                    rules={{required: 'First name is required'}}
                     icon={<FontAwesome style={styles.icon} name="user" size={24} color="black" />}
-                    value={firstName}
-                    setValue={setFirstName}
                 />
 
-                <CustomInput
+                <CustomInput 
+                    name="lastName"
                     placeholder="Last Name"
+                    control={control}
+                    rules={{required: 'Last Name is required'}}
                     icon={<FontAwesome style={styles.icon} name="user" size={24} color="black" />}
-                    value={lastName}
-                    setValue={setLastName}
                 />
 
-                <CustomInput
+                <CustomInput 
+                    name="email"
                     placeholder="Email"
+                    control={control}
+                    rules={{
+                        required: 'Email is required',
+                        pattern: {value: EMAIL_REGEX, message: 'Invalid email'},
+                    }}
                     icon={<MaterialIcons style={styles.icon} name="email" size={24} color="black" />}
-                    value={email}
-                    setValue={setEmail}
                 />
 
-                <CustomInput
+                <CustomInput 
+                    name="password"
                     placeholder="Password"
+                    control={control}
+                    rules={{
+                        required: 'Password is required',
+                        minLength: {
+                            value: 4,
+                            message: 'Password should at least 4 characters long'
+                        }
+                    }}
                     icon={<MaterialIcons style={styles.icon} name="vpn-key" size={24} color="black" />}
-                    value={password}
-                    setValue={setPassword}
+                    secureTextEntry
                 />
 
-                <CustomInput
+                <CustomInput 
+                    name="passwordRepeat"
                     placeholder="Repeat Password"
+                    control={control}
+                    rules={{
+                        validate: value => value === pwd || 'Password do not match',
+                    }}
                     icon={<MaterialIcons style={styles.icon} name="vpn-key" size={24} color="black" />}
-                    value={passwordRepeat}
-                    setValue={setPasswordRepeat}
-                />      
+                    secureTextEntry
+                />
 
                 <View style={styles.buttonContainer}>
-                    <Button color='#65A0C2' title='Create account' onPress={onPressCreateAccount} />
+                    <Button color='#65A0C2' title='Create account' onPress={handleSubmit(onCreateAccountPressed)} />
                 </View>
 
                 <Text style={styles.policyText}>By registering, you confirm that you accept our Terms of Use and Privacy Policy.</Text>
@@ -89,9 +106,6 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         overflow: 'hidden',
         width: '50%',
-    },
-    icon: {
-        marginTop: 5
     },
     policyText: {
         color: 'gray',
