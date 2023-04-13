@@ -3,6 +3,7 @@ import { StyleSheet, View, Button, FlatList, Text } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import TransactionMetro from './TransactionMetro';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import Header from './Header';
 
 export default function Dashboard() {
 
@@ -16,19 +17,9 @@ export default function Dashboard() {
 
     return (
         <SafeAreaView style={styles.container}>
-
+            
             <View style={styles.header}>
-                <View style={styles.leftItem}>
-                    <MaterialIcons style={styles.menuLogo} name="menu" size={30} color="black" />
-                </View>
-
-                <View style={styles.centerItem}>
-                    <Text style={styles.dashboardText}>Dashboard</Text>
-                </View>
-
-                <View style={styles.rightItem}>
-                    <MaterialIcons name="notifications" size={30} color="black" />
-                </View>
+                <Header title="Dashboard"/>
             </View>
 
             <View style={styles.myOpusCardContainer}>
@@ -72,22 +63,6 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         alignItems: 'center',
         margin: 10,
-    },
-    leftItem: {
-        flex: 1,
-        alignItems: 'flex-start',
-    },
-    centerItem: {
-        flex: 1,
-        alignItems: 'center',
-    },
-    rightItem: {
-        flex: 1,
-        alignItems: 'flex-end',
-    },
-    dashboardText: {
-        fontWeight: 'bold',
-        fontSize: 20,
     },
     myOpusCardContainer: {
         flex: 1,
@@ -134,10 +109,6 @@ const styles = StyleSheet.create({
         backgroundColor: '#D9D9D9',
         borderRadius: 10,
         paddingLeft: 5,
-    },
-    myTransitMTLLogo: {
-        width: 300,
-        height: 300,
     },
     buttonContainer: {
         margin: 10,

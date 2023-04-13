@@ -3,7 +3,7 @@ import { StyleSheet, View, Image, TouchableWithoutFeedback, Keyboard, Button, us
 import { MaterialIcons, FontAwesome } from '@expo/vector-icons';
 import CustomInput from '../components/CustomInput';
 import { useNavigation } from '@react-navigation/native';
-import { useForm, Controller } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 
 const EMAIL_REGEX = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
 
