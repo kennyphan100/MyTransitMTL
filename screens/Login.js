@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, View, Image, TouchableWithoutFeedback, Keyboard, Button, Text, useWindowDimensions } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import CustomInput from '../components/CustomInput';
 import { useNavigation } from '@react-navigation/native';
 import { useForm } from 'react-hook-form';
+import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
 
 const EMAIL_REGEX = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
 
@@ -13,8 +14,33 @@ export default function Login() {
 
     const {control, handleSubmit, formState: {errors}} = useForm();
 
+    useEffect(() => {
+        const auth = getAuth();
+        const unsubscribe = onAuthStateChanged(auth, (user) => {
+            if (user) {
+                navigation.navigate('Dashboard');
+            } else {
+                console.warn("invalid credentials");
+            }
+        })
+
+        return unsubscribe;
+    }, [])
+
     const onLogInPressed = (data) => {
-        navigation.navigate('Dashboard')
+        const auth = getAuth();
+        signInWithEmailAndPassword(auth, data.email, data.password)
+          .then((userCredential) => {
+            // Signed in 
+            const user = userCredential.user;
+            // ...
+          })
+          .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+          });
+
+        // navigation.navigate('Dashboard')
     }
 
     const onCreateAccountPressed = () => {

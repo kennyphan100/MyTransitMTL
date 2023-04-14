@@ -4,8 +4,12 @@ import { MaterialIcons } from '@expo/vector-icons';
 import TransactionMetro from './TransactionMetro';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Header from './Header';
+import { getAuth, signOut } from "firebase/auth";
+import { useNavigation } from '@react-navigation/native';
+import Recharge from './Recharge';
 
 export default function Dashboard() {
+    const navigation = useNavigation();
 
     const [transactions, setTransactions] = useState([
         { type: 'Metro', name: 'Snowdon', date:'2023-01-05 16:33', numberOfPassUsed: 1, numberOfPassAdded: 0},
@@ -15,12 +19,23 @@ export default function Dashboard() {
         { type: 'Metro', name: 'Vendome', date:'2022-11-13 14:54', numberOfPassUsed: 1, numberOfPassAdded: 5},
     ]);
 
+    const onLogoutPressed = () => {
+        const auth = getAuth();
+
+        signOut(auth).then(() => {
+            navigation.navigate('Home');
+          }).catch((error) => {
+            console.warn("lol");
+          });
+
+    }
+
     return (
         <SafeAreaView style={styles.container}>
             
-            <View style={styles.header}>
+            {/* <View style={styles.header}>
                 <Header title="Dashboard"/>
-            </View>
+            </View> */}
 
             <View style={styles.myOpusCardContainer}>
                 <Text style={styles.myOpusCardText}>No OPUS Card Registered</Text>
@@ -32,6 +47,9 @@ export default function Dashboard() {
 
                     <View style={styles.buttonContainer}>
                         <Button color='#65A0C2' title='Apply' />
+                    </View>
+                    <View style={styles.buttonContainer}>
+                        <Button color='#65A0C2' title='Logout' onPress={onLogoutPressed} />
                     </View>
                 </View>
 

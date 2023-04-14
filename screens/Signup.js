@@ -4,6 +4,7 @@ import { MaterialIcons, FontAwesome } from '@expo/vector-icons';
 import CustomInput from '../components/CustomInput';
 import { useNavigation } from '@react-navigation/native';
 import { useForm } from 'react-hook-form';
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 
 const EMAIL_REGEX = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
 
@@ -15,7 +16,13 @@ export default function Signup() {
     const pwd = watch('password');
 
     const onCreateAccountPressed = (data) => {
-        console.warn("create account pressed");
+        const auth = getAuth();
+        createUserWithEmailAndPassword(auth, data.email, data.password)
+        .then((userCredential) => {
+            const user = userCredential.user;
+        })
+
+        console.warn(data.email, data.password);
         navigation.navigate('Dashboard')
     }
 

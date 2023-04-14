@@ -9,12 +9,10 @@ const Drawer = createDrawerNavigator();
 
 export default function DrawerNavigation() {
   return (
-    <NavigationContainer independent={true}>
         <Drawer.Navigator>
             <Drawer.Screen name="Dashboard" component={Dashboard} />
             <Drawer.Screen name="Recharge" component={Recharge} />
         </Drawer.Navigator>
-    </NavigationContainer>
   )
 }
 
