@@ -1,19 +1,28 @@
 import React, {useState} from 'react';
-import { StyleSheet, View, Button, FlatList, Text } from 'react-native';
+import { StyleSheet, View, Button, FlatList, Text, Image, TouchableOpacity } from 'react-native';
 import TransactionMetro from './TransactionMetro';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
+import { AntDesign  } from '@expo/vector-icons';
 
 export default function Dashboard() {
     const navigation = useNavigation();
 
-    const [transactions, setTransactions] = useState([
-        { type: 'Metro', name: 'Snowdon', date:'2023-01-05 16:33', numberOfPassUsed: 1, numberOfPassAdded: 0},
-        { type: 'Bus', name: '102 O', date:'2023-01-01 13:07', numberOfPassUsed: 1, numberOfPassAdded: 0},
-        { type: 'Bus', name: '420 E', date:'2022-12-21 19:14', numberOfPassUsed: 1, numberOfPassAdded: 0},
-        { type: 'Recharge', name: 'Recharge ($29.99)', date:'2022-12-17 15:45', numberOfPassUsed: 0, numberOfPassAdded: 5},
-        { type: 'Metro', name: 'Vendome', date:'2022-11-13 14:54', numberOfPassUsed: 1, numberOfPassAdded: 5},
-    ]);
+    const [OPUSCard, setOPUSCard] = useState();
+
+    const onAddOPUSPressed = () => {
+        setOPUSCard(
+            { name: 'Joe User', 
+              transactions: [
+                                { type: 'Metro', name: 'Snowdon', date:'2023-01-05 16:33', numberOfPassUsed: 1, numberOfPassAdded: 0},
+                                { type: 'Bus', name: '102 O', date:'2023-01-01 13:07', numberOfPassUsed: 1, numberOfPassAdded: 0},
+                                { type: 'Bus', name: '420 E', date:'2022-12-21 19:14', numberOfPassUsed: 1, numberOfPassAdded: 0},
+                                { type: 'Recharge', name: 'Recharge ($29.99)', date:'2022-12-17 15:45', numberOfPassUsed: 0, numberOfPassAdded: 5},
+                                { type: 'Metro', name: 'Vendome', date:'2022-11-13 14:54', numberOfPassUsed: 1, numberOfPassAdded: 5},
+                            ]
+            }
+        );
+    }
 
     return (
         <SafeAreaView style={styles.container}>
@@ -22,29 +31,46 @@ export default function Dashboard() {
                 <Header title="Dashboard"/>
             </View> */}
 
-            <View style={styles.myOpusCardContainer}>
-                <Text style={styles.myOpusCardText}>No OPUS Card Registered</Text>
-
-                <View style={styles.myopuscardbuttons}>
-                    <View style={styles.buttonContainer}>
-                        <Button color='#65C271' title='Add'/>
+            {OPUSCard ? 
+                <View style={styles.myOpusCardContainer}>
+                    <Image style={styles.OPUSCard} source={require('../assets/OPUSCard.png')} />
+    
+                    <View style={styles.viewTextStyle}>
+                        <Text style={styles.textStyle}>{OPUSCard.name}</Text>
                     </View>
+    
+                    <TouchableOpacity style={styles.addPassesStyle} onPress={() => navigation.navigate('Purchase Passes')}>
+                        <AntDesign name="pluscircle" size={36} color='#65C271' />
+                    </TouchableOpacity>
+                </View>
+            : 
+                <View style={styles.myOpusCardContainerNoOPUS}>
+                    <Text style={styles.myOpusCardText}>No OPUS Card Registered</Text>
 
-                    <View style={styles.buttonContainer}>
-                        <Button color='#65A0C2' title='Apply' />
+                    <View style={styles.myopuscardbuttons}>
+                        <View style={styles.buttonContainer}>
+                            <Button color='#65C271' title='Add' onPress={onAddOPUSPressed}/>
+                        </View>
+
+                        <View style={styles.buttonContainer}>
+                            <Button color='#65A0C2' title='Apply' />
+                        </View>
                     </View>
                 </View>
-
-            </View>
+            }
 
             <View style={styles.mytransactionsContainer}>
                 <Text style={styles.mytransactionsTitle}>My Transactions</Text>
-                <FlatList
-                    data={transactions}
-                    renderItem={({ item, index }) => {
-                        return <TransactionMetro transaction={item} />
-                    }}
-                />
+                {OPUSCard ?
+                    <FlatList
+                        data={OPUSCard.transactions}
+                        renderItem={({ item, index }) => {
+                            return <TransactionMetro transaction={item} />
+                        }}
+                    /> 
+                :
+                    <></>
+                }
             </View>
 
         </SafeAreaView>
@@ -65,6 +91,32 @@ const styles = StyleSheet.create({
         margin: 10,
     },
     myOpusCardContainer: {
+        flex: 1,
+        width: '80%',
+        margin: 10,
+    },
+    OPUSCard: {
+        width: '100%',
+        height: '100%',
+    },
+    viewTextStyle: {
+        position: 'absolute',
+        bottom: 0,
+        marginLeft: 15,
+        marginBottom: 25,
+    },
+    addPassesStyle: {
+        position: 'absolute',
+        right: 0,
+        bottom: 0,
+        marginRight: 15,
+        marginBottom: 15,
+    },
+    textStyle: {
+        color: 'white',
+        fontSize: 16,
+    },
+    myOpusCardContainerNoOPUS: {
         flex: 1,
         backgroundColor: '#D9D9D9',
         margin: 10,
