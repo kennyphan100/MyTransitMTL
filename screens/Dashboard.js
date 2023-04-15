@@ -4,9 +4,11 @@ import TransactionMetro from './TransactionMetro';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
 import { AntDesign  } from '@expo/vector-icons';
+import { auth } from '../firebaseConfig';
 
 export default function Dashboard() {
     const navigation = useNavigation();
+    const user = auth.currentUser;
 
     const [OPUSCard, setOPUSCard] = useState();
 

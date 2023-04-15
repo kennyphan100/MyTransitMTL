@@ -1,6 +1,6 @@
 import { DrawerContentScrollView, DrawerItemList, DrawerItem } from '@react-navigation/drawer';
 import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
-import { FontAwesome, MaterialIcons  } from '@expo/vector-icons';
+import { FontAwesome, MaterialIcons, Ionicons  } from '@expo/vector-icons';
 import { signOut } from "firebase/auth";
 import { auth } from '../firebaseConfig';
 
@@ -17,20 +17,26 @@ export default function CustomDrawerContent(props) {
     return (
       <DrawerContentScrollView {...props}>
         
-        <TouchableOpacity style={styles.closeSideBarIcon}>
-            <FontAwesome name="close" size={24} color="black" onPress={props.navigation.closeDrawer} />
-        </TouchableOpacity>
+        <View style={styles.topContainer}>
+          <TouchableOpacity style={styles.closeSideBarIcon}>
+              <FontAwesome name="close" size={24} color="white" onPress={props.navigation.closeDrawer} />
+          </TouchableOpacity>
 
-        <View>
-          <Text>Profile</Text>
+          <View style={styles.profileContainer}>
+            <Ionicons style={styles.profileIcon} name="person-circle-outline" size={60} color="white" />
+
+            <View style={styles.smallContainer}>
+              <Text style={styles.userName}>Joe User</Text>
+              <TouchableOpacity style={styles.logoutIcon}>
+                <MaterialIcons name="logout" size={24} color="white" onPress={onLogoutPressed} />
+              </TouchableOpacity>
+            </View>
+          </View>
         </View>
 
-        <TouchableOpacity style={styles.logoutIcon}>
-            <MaterialIcons name="logout" size={24} color="black" onPress={onLogoutPressed} />
-        </TouchableOpacity>
-        
         <DrawerItemList {...props} />
         {/* <DrawerItem label= {"Sign out"} /> */}
+
       </DrawerContentScrollView>
     );
   }
@@ -38,12 +44,33 @@ export default function CustomDrawerContent(props) {
 const styles = StyleSheet.create({
     closeSideBarIcon: {
       alignSelf: 'flex-end',
-      margin: 10
-        
+      marginRight: 10
+    },
+    topContainer: {
+      backgroundColor: '#65A0C2',
+      paddingTop: 10,
+      paddingBottom: 10,
+    },
+    profileContainer: {
+      flex: 1
+    },
+    smallContainer: {
+      flexDirection: 'row',
+      justifyContent: 'space-between'
     },
     logoutIcon: {
       alignSelf: 'flex-end',
+      justifyContent: 'flex-end',
+      alignItems: 'flex-end',
       margin: 5,
+    },
+    profileIcon: {
+      marginLeft: 5,
+    },
+    userName: {
+      fontSize: 20,
+      marginLeft: 10,
+      color: 'white'
     },
 
 });
