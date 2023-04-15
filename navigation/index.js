@@ -11,6 +11,7 @@ import Dashboard from '../screens/Dashboard';
 import Recharge from '../screens/Recharge';
 import CustomerDrawerContent from '../screens/CustomDrawerContent';
 import Wallet from '../screens/Wallet';
+import AddPaymentMethod from '../screens/AddPaymentMethod';
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -28,6 +29,7 @@ const Navigation = () => {
                   <Drawer.Screen name="Dashboard" component={Dashboard} />
                   <Drawer.Screen name="Purchase Passes" component={Recharge} />
                   <Drawer.Screen name="Wallet" component={Wallet} />
+                  <Drawer.Screen name="Add Payment Method" component={AddPaymentMethod} />
                 </Drawer.Navigator>
               )}
             </Stack.Screen>
