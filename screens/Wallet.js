@@ -4,6 +4,7 @@ import PaymentMethods from './PaymentMethods';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
 import { Foundation } from '@expo/vector-icons'; 
+import AddPaymentMethod from './AddPaymentMethod';
 
 export default function Wallet() {
     const navigation = useNavigation();
@@ -14,6 +15,10 @@ export default function Wallet() {
         { type: 'Paypal', name: 'Paypal'},
     
     ]);
+
+    const onAddPaymentMethodPress = () => {
+        navigation.navigate("Add Payment Method")
+    }
 
     return (
         <SafeAreaView style={styles.container}>
@@ -57,7 +62,7 @@ export default function Wallet() {
 
             <View style={styles.myWalletButtons}>
                     <View style={styles.buttonContainer}>
-                        <Button color='#65C271' title='Add payment method' />
+                        <Button color='#65C271' title='Add payment method' onPress={onAddPaymentMethodPress}/>
                     </View>
                 </View>
 

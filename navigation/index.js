@@ -3,7 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import 'react-native-gesture-handler';
 import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList, DrawerItem } from '@react-navigation/drawer';
-import { Feather, AntDesign, FontAwesome  } from '@expo/vector-icons';
+import { Feather, AntDesign, FontAwesome, MaterialIcons } from '@expo/vector-icons';
 
 import Home from '../screens/Home';
 import Login from '../screens/Login';
@@ -12,6 +12,7 @@ import Dashboard from '../screens/Dashboard';
 import Recharge from '../screens/Recharge';
 import CustomerDrawerContent from '../screens/CustomDrawerContent';
 import Wallet from '../screens/Wallet';
+import AddPaymentMethod from '../screens/AddPaymentMethod';
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -36,6 +37,10 @@ const Navigation = () => {
                   />
                   <Drawer.Screen name="Wallet" component={Wallet} options={{
                         drawerIcon: config => <AntDesign name="wallet" size={24} color="black" />
+                        }} 
+                  />
+                  <Drawer.Screen name="Add Payment Method" component={AddPaymentMethod} options={{
+                        drawerItemStyle: { height: 0 }
                         }} 
                   />
                 </Drawer.Navigator>
