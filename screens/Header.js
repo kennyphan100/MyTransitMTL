@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
 import React from 'react'
 import { MaterialIcons } from '@expo/vector-icons';
 
@@ -6,7 +6,15 @@ export default function Header({title}) {
   return (
     <>
         <View style={styles.leftItem}>
-            <MaterialIcons style={styles.menuLogo} name="menu" size={30} color="black" />
+            <TouchableOpacity>
+                <MaterialIcons 
+                    style={styles.menuLogo} 
+                    name="menu" 
+                    size={30} 
+                    color="black" 
+                    // onPress={this.props.navigation.openDrawer} 
+                />
+            </TouchableOpacity>
         </View>
 
         <View style={styles.centerItem}>

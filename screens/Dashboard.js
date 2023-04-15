@@ -1,12 +1,8 @@
 import React, {useState} from 'react';
 import { StyleSheet, View, Button, FlatList, Text } from 'react-native';
-import { MaterialIcons } from '@expo/vector-icons';
 import TransactionMetro from './TransactionMetro';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import Header from './Header';
-import { getAuth, signOut } from "firebase/auth";
 import { useNavigation } from '@react-navigation/native';
-import Recharge from './Recharge';
 
 export default function Dashboard() {
     const navigation = useNavigation();
@@ -18,17 +14,6 @@ export default function Dashboard() {
         { type: 'Recharge', name: 'Recharge ($29.99)', date:'2022-12-17 15:45', numberOfPassUsed: 0, numberOfPassAdded: 5},
         { type: 'Metro', name: 'Vendome', date:'2022-11-13 14:54', numberOfPassUsed: 1, numberOfPassAdded: 5},
     ]);
-
-    const onLogoutPressed = () => {
-        const auth = getAuth();
-
-        signOut(auth).then(() => {
-            navigation.navigate('Home');
-          }).catch((error) => {
-            console.warn("lol");
-          });
-
-    }
 
     return (
         <SafeAreaView style={styles.container}>
@@ -47,9 +32,6 @@ export default function Dashboard() {
 
                     <View style={styles.buttonContainer}>
                         <Button color='#65A0C2' title='Apply' />
-                    </View>
-                    <View style={styles.buttonContainer}>
-                        <Button color='#65A0C2' title='Logout' onPress={onLogoutPressed} />
                     </View>
                 </View>
 
