@@ -10,6 +10,7 @@ import Signup from '../screens/Signup';
 import Dashboard from '../screens/Dashboard';
 import Recharge from '../screens/Recharge';
 import CustomerDrawerContent from '../screens/CustomDrawerContent';
+import Wallet from '../screens/Wallet';
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -26,6 +27,7 @@ const Navigation = () => {
                 <Drawer.Navigator drawerContent={(props) => <CustomerDrawerContent {...props} />}>
                   <Drawer.Screen name="Dashboard" component={Dashboard} />
                   <Drawer.Screen name="Purchase Passes" component={Recharge} />
+                  <Drawer.Screen name="Wallet" component={Wallet} />
                 </Drawer.Navigator>
               )}
             </Stack.Screen>
