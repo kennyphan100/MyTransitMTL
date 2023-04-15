@@ -1,5 +1,5 @@
 import { DrawerContentScrollView, DrawerItemList, DrawerItem } from '@react-navigation/drawer';
-import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity, Image } from 'react-native';
 import { FontAwesome, MaterialIcons, Ionicons  } from '@expo/vector-icons';
 import { signOut } from "firebase/auth";
 import { auth } from '../firebaseConfig';
@@ -37,6 +37,10 @@ export default function CustomDrawerContent(props) {
         <DrawerItemList {...props} />
         {/* <DrawerItem label= {"Sign out"} /> */}
 
+        <View style={styles.logoContainer}>
+          <Image style={styles.MyTransitMTLLogo} source={require('../assets/MyTransitMTL.png')} />
+        </View>
+
       </DrawerContentScrollView>
     );
   }
@@ -72,5 +76,13 @@ const styles = StyleSheet.create({
       marginLeft: 10,
       color: 'white'
     },
+    logoContainer: {
+      marginTop: 300,
+      alignItems: 'center',
+    },
+    MyTransitMTLLogo: {
+      width: 200,
+      height: 200,
+    }
 
 });

@@ -3,6 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import 'react-native-gesture-handler';
 import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList, DrawerItem } from '@react-navigation/drawer';
+import { Feather, AntDesign, FontAwesome  } from '@expo/vector-icons';
 
 import Home from '../screens/Home';
 import Login from '../screens/Login';
@@ -25,9 +26,18 @@ const Navigation = () => {
             <Stack.Screen name="Dashboard">
               {() => (
                 <Drawer.Navigator drawerContent={(props) => <CustomerDrawerContent {...props} />}>
-                  <Drawer.Screen name="Dashboard" component={Dashboard} />
-                  <Drawer.Screen name="Purchase Passes" component={Recharge} />
-                  <Drawer.Screen name="Wallet" component={Wallet} />
+                  <Drawer.Screen name="Dashboard" component={Dashboard} options={{
+                        drawerIcon: config => <Feather name="home" size={24} color="black" />,
+                        }}
+                  />
+                  <Drawer.Screen name="Purchase Passes" component={Recharge} options={{
+                        drawerIcon: config => <FontAwesome name="ticket" size={24} color="black" />
+                        }} 
+                  />
+                  <Drawer.Screen name="Wallet" component={Wallet} options={{
+                        drawerIcon: config => <AntDesign name="wallet" size={24} color="black" />
+                        }} 
+                  />
                 </Drawer.Navigator>
               )}
             </Stack.Screen>
