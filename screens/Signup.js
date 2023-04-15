@@ -26,6 +26,10 @@ export default function Signup() {
         navigation.navigate('Dashboard')
     }
 
+    const onLoginPressed = () => {
+        navigation.navigate('Login')
+    }
+
     return (
         <TouchableWithoutFeedback onPress={() => {
             Keyboard.dismiss();
@@ -92,6 +96,13 @@ export default function Signup() {
 
                 <Text style={styles.policyText}>By registering, you confirm that you accept our Terms of Use and Privacy Policy.</Text>
 
+                <View style={styles.bottomTextContainer}>
+                    <Text>
+                        Already have an account?  {""}
+                        <Text style={styles.loginText} onPress={onLoginPressed}>Log In</Text>
+                    </Text>
+                </View>
+
             </View>
         </TouchableWithoutFeedback>        
     );
@@ -118,5 +129,9 @@ const styles = StyleSheet.create({
         color: 'gray',
         width: '80%',
         margin: 5,
-    }
+    },
+    loginText: {
+        color: '#0645AD',
+        textDecorationLine: 'underline',
+    },
 })

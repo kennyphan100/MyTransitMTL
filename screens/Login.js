@@ -5,25 +5,23 @@ import CustomInput from '../components/CustomInput';
 import { useNavigation } from '@react-navigation/native';
 import { useForm } from 'react-hook-form';
 import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
+import { auth } from '../firebaseConfig';
 
 const EMAIL_REGEX = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
 
 export default function Login() {
     const {height} = useWindowDimensions();
     const navigation = useNavigation();
+    const [ error, setError ] = useState();
 
     const {control, handleSubmit, formState: {errors}} = useForm();
 
     useEffect(() => {
-        const auth = getAuth();
         const unsubscribe = onAuthStateChanged(auth, (user) => {
             if (user) {
                 navigation.navigate('Dashboard');
-            } else {
-                console.warn("invalid credentials");
             }
         })
-
         return unsubscribe;
     }, [])
 
@@ -33,14 +31,13 @@ export default function Login() {
           .then((userCredential) => {
             // Signed in 
             const user = userCredential.user;
-            // ...
+            alert("You have successfuly logged in.");
           })
           .catch((error) => {
             const errorCode = error.code;
             const errorMessage = error.message;
+            setError("Invalid Credentials. Try Again.");
           });
-
-        // navigation.navigate('Dashboard')
     }
 
     const onCreateAccountPressed = () => {
@@ -53,6 +50,8 @@ export default function Login() {
         }}>
             <View style={styles.container}>
                 <Image style={[styles.myTransitMTLLogo, {height: height * 0.3}]} source={require('../assets/MyTransitMTL.png')} />
+
+                {error ? <Text style={styles.error}>{error }</Text> : null}
 
                 <CustomInput 
                     name="email"
@@ -117,4 +116,7 @@ const styles = StyleSheet.create({
         color: '#0645AD',
         textDecorationLine: 'underline'
     },
+    error: {
+        color: 'red',
+    }
 })
