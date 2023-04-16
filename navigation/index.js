@@ -3,7 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import 'react-native-gesture-handler';
 import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList, DrawerItem } from '@react-navigation/drawer';
-import { Feather, AntDesign, FontAwesome, MaterialIcons } from '@expo/vector-icons';
+import { Feather, AntDesign, FontAwesome, MaterialCommunityIcons  } from '@expo/vector-icons';
 
 import Home from '../screens/Home';
 import Login from '../screens/Login';
@@ -16,6 +16,7 @@ import AddPaymentMethod from '../screens/AddPaymentMethod';
 import Map from '../screens/Map';
 import Settings from '../screens/Settings';
 import AddCard from '../screens/AddCard';
+import CardReading from '../screens/CardReading';
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -49,7 +50,11 @@ const Navigation = () => {
                   <Drawer.Screen name="Map" component={Map} options={{
                         drawerIcon: config => <Feather name="map" size={24} color="black" />
                         }} 
-                  />     
+                  />
+                  <Drawer.Screen name="Card Reading" component={CardReading} options={{
+                        drawerIcon: config => <MaterialCommunityIcons name="cellphone-nfc" size={24} color="black" />
+                        }} 
+                  />         
                   <Drawer.Screen name="Settings" component={Settings} options={{
                         drawerIcon: config => <Feather name="settings" size={24} color="black" />
                         }} 
