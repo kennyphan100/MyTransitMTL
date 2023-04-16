@@ -13,7 +13,11 @@ import Recharge from '../screens/Recharge';
 import CustomerDrawerContent from '../screens/CustomDrawerContent';
 import Wallet from '../screens/Wallet';
 import AddPaymentMethod from '../screens/AddPaymentMethod';
+<<<<<<< HEAD
 import Settings from '../screens/Settings';
+=======
+import AddCard from '../screens/AddCard';
+>>>>>>> c710a4301af85ce90677ebf46f0fe5b8e95620db
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -48,6 +52,10 @@ const Navigation = () => {
                         drawerIcon: config => <Feather name="settings" size={24} color="black" />
                         }} 
                   />                  
+                  <Drawer.Screen name="Add Card" component={AddCard} options={{
+                        drawerItemStyle: { height: 0 }
+                        }} 
+                  />
                 </Drawer.Navigator>
               )}
             </Stack.Screen>
