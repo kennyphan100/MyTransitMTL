@@ -1,15 +1,16 @@
 import { initializeApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
+import { API_KEY, AUTH_DOMAIN, DATABASE_URL, PROJECT_ID, STORAGE_BUCKET, MESSAGING_SENDER_ID, APP_ID } from '@env';
 
 // Initialize Firebase
 const firebaseConfig = {
-  apiKey: "AIzaSyCEUY5XKTB9iJU46MhQNPAdwM-NaBC0UBE",
-  authDomain: "mytransitmtl-b49dd.firebaseapp.com",
-  projectId: "mytransitmtl-b49dd",
-  storageBucket: "mytransitmtl-b49dd.appspot.com",
-  messagingSenderId: "480265413009",
-  appId: "1:480265413009:web:3d1530a71ffa2cbf79fa30"
+  apiKey: API_KEY,
+  authDomain: AUTH_DOMAIN,
+  projectId: PROJECT_ID,
+  storageBucket: STORAGE_BUCKET,
+  messagingSenderId: MESSAGING_SENDER_ID,
+  appId: APP_ID
 };
 
 const app = initializeApp(firebaseConfig);
