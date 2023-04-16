@@ -85,6 +85,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         alignItems: 'center',
         justifyContent: 'center',
+        borderTopWidth: 1,
     },
     header: {
         flexDirection: 'row',

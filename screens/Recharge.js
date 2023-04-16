@@ -50,6 +50,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         height: '50%',
         // justifyContent: 'center',
+        borderTopWidth: 1,
     },
     passesContainer: {
         backgroundColor: '#D9D9D9',
