@@ -5,6 +5,7 @@ import { signOut } from "firebase/auth";
 import { auth } from '../firebaseConfig';
 
 export default function CustomDrawerContent(props) {
+    const user = auth.currentUser;
 
     const onLogoutPressed = () => {
         signOut(auth).then(() => {
@@ -27,7 +28,7 @@ export default function CustomDrawerContent(props) {
               <Ionicons style={styles.profileIcon} name="person-circle-outline" size={60} color="white" />
 
               <View style={styles.smallContainer}>
-                <Text style={styles.userName}>Joe User</Text>
+                <Text style={styles.userName}>{user.displayName}</Text>
                 <TouchableOpacity style={styles.logoutIcon}>
                   <MaterialIcons name="logout" size={24} color="white" onPress={onLogoutPressed} />
                 </TouchableOpacity>

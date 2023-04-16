@@ -4,7 +4,8 @@ import { MaterialIcons, FontAwesome } from '@expo/vector-icons';
 import CustomInput from '../components/CustomInput';
 import { useNavigation } from '@react-navigation/native';
 import { useForm } from 'react-hook-form';
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { auth } from '../firebaseConfig';
 
 const EMAIL_REGEX = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
 
@@ -15,14 +16,20 @@ export default function Signup() {
     const {control, handleSubmit, formState: {errors}, watch } = useForm();
     const pwd = watch('password');
 
-    const onCreateAccountPressed = (data) => {
-        const auth = getAuth();
-        createUserWithEmailAndPassword(auth, data.email, data.password)
-        .then((userCredential) => {
-            const user = userCredential.user;
-        })
+    const onCreateAccountPressed = async (data) => {
+        const fullName = data.firstName + " " + data.lastName;
 
-        console.warn(data.email, data.password);
+        try {
+            await createUserWithEmailAndPassword(auth, data.email, data.password).catch((err) =>
+              console.log(err)
+            );
+            await updateProfile(auth.currentUser, { displayName: fullName }).catch(
+              (err) => console.log(err)
+            );
+        } catch (err) {
+            console.log(err);
+        }
+        
         navigation.navigate('Dashboard')
     }
 

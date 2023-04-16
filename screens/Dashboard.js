@@ -14,7 +14,7 @@ export default function Dashboard() {
 
     const onAddOPUSPressed = () => {
         setOPUSCard(
-            { name: 'Joe User', 
+            { name: user.displayName, 
               transactions: [
                                 { type: 'Metro', name: 'Snowdon', date:'2023-01-05 16:33', numberOfPassUsed: 1, numberOfPassAdded: 0},
                                 { type: 'Bus', name: '102 O', date:'2023-01-01 13:07', numberOfPassUsed: 1, numberOfPassAdded: 0},
