@@ -37,7 +37,7 @@ export default function Dashboard() {
                         <Text style={styles.textStyle}>{OPUSCard.name}</Text>
                     </View>
     
-                    <TouchableOpacity style={styles.addPassesStyle} onPress={() => navigation.navigate('Purchase Passes')}>
+                    <TouchableOpacity style={styles.addPassesStyle} onPress={() => navigation.navigate('Purchase Pass')}>
                         <AntDesign name="pluscircle" size={36} color='#65C271' />
                     </TouchableOpacity>
                 </View>

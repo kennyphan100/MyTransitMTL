@@ -33,8 +33,8 @@ const Navigation = () => {
                         drawerIcon: config => <Feather name="home" size={24} color="black" />,
                         }}
                   />
-                  <Drawer.Screen name="Purchase Passes" component={Recharge} options={{
-                        drawerIcon: config => <FontAwesome name="ticket" size={24} color="black" />
+                  <Drawer.Screen name="Purchase Pass" component={Recharge} options={{
+                        drawerIcon: config => <FontAwesome name="ticket" size={24} color="black" />,
                         }} 
                   />
                   <Drawer.Screen name="Wallet" component={Wallet} options={{
