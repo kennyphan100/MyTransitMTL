@@ -28,10 +28,6 @@ export default function Dashboard() {
 
     return (
         <SafeAreaView style={styles.container}>
-            
-            {/* <View style={styles.header}>
-                <Header title="Dashboard"/>
-            </View> */}
 
             {OPUSCard ? 
                 <View style={styles.myOpusCardContainer}>
@@ -86,12 +82,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         borderTopWidth: 1,
-    },
-    header: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        margin: 10,
     },
     myOpusCardContainer: {
         flex: 1,
