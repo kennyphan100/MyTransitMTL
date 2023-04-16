@@ -15,33 +15,34 @@ export default function CustomDrawerContent(props) {
     }
 
     return (
-      <DrawerContentScrollView {...props}>
-        
-        <View style={styles.topContainer}>
-          <TouchableOpacity style={styles.closeSideBarIcon}>
-              <FontAwesome name="close" size={24} color="white" onPress={props.navigation.closeDrawer} />
-          </TouchableOpacity>
+      <>
+        <DrawerContentScrollView {...props}>
+          
+          <View style={styles.topContainer}>
+            <TouchableOpacity style={styles.closeSideBarIcon}>
+                <FontAwesome name="close" size={24} color="white" onPress={props.navigation.closeDrawer} />
+            </TouchableOpacity>
 
-          <View style={styles.profileContainer}>
-            <Ionicons style={styles.profileIcon} name="person-circle-outline" size={60} color="white" />
+            <View style={styles.profileContainer}>
+              <Ionicons style={styles.profileIcon} name="person-circle-outline" size={60} color="white" />
 
-            <View style={styles.smallContainer}>
-              <Text style={styles.userName}>Joe User</Text>
-              <TouchableOpacity style={styles.logoutIcon}>
-                <MaterialIcons name="logout" size={24} color="white" onPress={onLogoutPressed} />
-              </TouchableOpacity>
+              <View style={styles.smallContainer}>
+                <Text style={styles.userName}>Joe User</Text>
+                <TouchableOpacity style={styles.logoutIcon}>
+                  <MaterialIcons name="logout" size={24} color="white" onPress={onLogoutPressed} />
+                </TouchableOpacity>
+              </View>
             </View>
           </View>
-        </View>
 
-        <DrawerItemList {...props} />
-        {/* <DrawerItem label= {"Sign out"} /> */}
+          <DrawerItemList {...props} />
 
+        </DrawerContentScrollView>
+        
         <View style={styles.logoContainer}>
           <Image style={styles.MyTransitMTLLogo} source={require('../assets/MyTransitMTL.png')} />
         </View>
-
-      </DrawerContentScrollView>
+      </>
     );
   }
 
@@ -77,7 +78,6 @@ const styles = StyleSheet.create({
       color: 'white'
     },
     logoContainer: {
-      marginTop: 300,
       alignItems: 'center',
     },
     MyTransitMTLLogo: {
