@@ -25,6 +25,14 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "android": {
+      "package": "com.yourcompany.yourappname",
+      "config": {
+        "googleMaps": {
+          "apiKey": "@env(MAPS_API_KEY)"
+        }
+      }
     }
   }
 }

@@ -13,6 +13,7 @@ import Recharge from '../screens/Recharge';
 import CustomerDrawerContent from '../screens/CustomDrawerContent';
 import Wallet from '../screens/Wallet';
 import AddPaymentMethod from '../screens/AddPaymentMethod';
+import Map from '../screens/Map';
 import Settings from '../screens/Settings';
 import AddCard from '../screens/AddCard';
 
@@ -45,6 +46,10 @@ const Navigation = () => {
                         drawerItemStyle: { height: 0 }
                         }} 
                   />
+                  <Drawer.Screen name="Map" component={Map} options={{
+                        drawerIcon: config => <Feather name="map" size={24} color="black" />
+                        }} 
+                  />     
                   <Drawer.Screen name="Settings" component={Settings} options={{
                         drawerIcon: config => <Feather name="settings" size={24} color="black" />
                         }} 
