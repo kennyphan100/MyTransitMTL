@@ -13,6 +13,7 @@ import Recharge from '../screens/Recharge';
 import CustomerDrawerContent from '../screens/CustomDrawerContent';
 import Wallet from '../screens/Wallet';
 import AddPaymentMethod from '../screens/AddPaymentMethod';
+import AddCard from '../screens/AddCard';
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -40,6 +41,10 @@ const Navigation = () => {
                         }} 
                   />
                   <Drawer.Screen name="Add Payment Method" component={AddPaymentMethod} options={{
+                        drawerItemStyle: { height: 0 }
+                        }} 
+                  />
+                  <Drawer.Screen name="Add Card" component={AddCard} options={{
                         drawerItemStyle: { height: 0 }
                         }} 
                   />
