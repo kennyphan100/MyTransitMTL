@@ -1,16 +1,21 @@
 import React, {useState} from 'react';
-import { StyleSheet, View, Button, FlatList, Text, Image } from 'react-native';
+import { StyleSheet, View, Button, FlatList, Text, Image, Touchable } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
 import { MaterialIcons } from '@expo/vector-icons'; 
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 export default function AddPaymentMethod() {
     const navigation = useNavigation();
 
+    const onAddCardPress = () => {
+        navigation.navigate("Add Card")
+    }
+
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.paymentMethodsContainer}>
-                <View style={styles.paymentMethodsContainer1}>
+                <TouchableOpacity style={styles.paymentMethodsContainer1} onPress={onAddCardPress}>
                     <Image style={styles.logo} source={require('../assets/applePay.png')} />
                     
                     <View style={styles.textContainer}>
@@ -18,11 +23,11 @@ export default function AddPaymentMethod() {
                     </View>
 
                     <View style={styles.editPaymentMethodsContainer}>
-                        <MaterialIcons name="keyboard-arrow-right" size={24} color="black" />
+                        <MaterialIcons name="keyboard-arrow-right" size={24} color="black"/>
                     </View>
-                </View>
+                </TouchableOpacity>
 
-                <View style={styles.paymentMethodsContainer1}>
+                <TouchableOpacity style={styles.paymentMethodsContainer1} onPress={onAddCardPress}>
                     <Image style={styles.logo} source={require('../assets/card.png')} />
                     
                     <View style={styles.textContainer}>
@@ -30,11 +35,13 @@ export default function AddPaymentMethod() {
                     </View>
 
                     <View style={styles.editPaymentMethodsContainer}>
-                        <MaterialIcons name="keyboard-arrow-right" size={24} color="black" />
+                    <TouchableOpacity>
+                            <MaterialIcons name="keyboard-arrow-right" size={24} color="black" onPress={onAddCardPress} />
+                        </TouchableOpacity>
                     </View>
-                </View>
+                </TouchableOpacity>
 
-                <View style={styles.paymentMethodsContainer1}>
+                <TouchableOpacity style={styles.paymentMethodsContainer1} onPress={onAddCardPress}>
                     <Image style={styles.logo} source={require('../assets/paypal.png')} />
                     
                     <View style={styles.textContainer}>
@@ -42,9 +49,11 @@ export default function AddPaymentMethod() {
                     </View>
 
                     <View style={styles.editPaymentMethodsContainer}>
-                        <MaterialIcons name="keyboard-arrow-right" size={24} color="black" />
+                        <TouchableOpacity>
+                            <MaterialIcons name="keyboard-arrow-right" size={24} color="black" onPress={onAddCardPress} />
+                        </TouchableOpacity>
                     </View>
-                </View>
+                </TouchableOpacity>
             </View>
         </SafeAreaView>
     );
@@ -55,6 +64,7 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#fff',
         alignItems: 'center',
+        borderTopWidth: 1,
     },
     paymentMethodsContainer: {
         backgroundColor: '#D9D9D9',
