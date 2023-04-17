@@ -40,6 +40,41 @@ const busData = [
     intersection: 'Station Guy-Concordia',
     time: '20 min',
   },
+  {
+    id: 6,
+    image: metroImage,
+    number: 'Angrignon',
+    intersection: 'Berri-UQAM',
+    time: '4 min',
+  },
+  {
+    id: 7,
+    image: metroImage,
+    number: 'Snowdon',
+    intersection: 'Vendôme',
+    time: '3 min',
+  },
+  {
+    id: 8,
+    image: busImage,
+    number: '24 E Sherbrooke',
+    intersection: 'Sherbrooke / Saint-Denis',
+    time: '9 min',
+  },
+  {
+    id: 9,
+    image: busImage,
+    number: '51 S Edouard-Montpetit',
+    intersection: 'Côte-Sainte-Catherine / Edouard-Montpetit',
+    time: '7 min',
+  },
+  {
+    id: 10,
+    image: busImage,
+    number: '80 N Avenue du Parc',
+    intersection: 'Avenue du Parc / Pine',
+    time: '11 min',
+  },
 ];
 
 export default function Map() {
@@ -80,7 +115,8 @@ export default function Map() {
             key={bus.id}
             style={[
               styles.busItem,
-              index === 0 ? { backgroundColor: 'green' } : index === 1 ? { backgroundColor: 'orange' } : null,
+              index === 0 ? { backgroundColor: 'green' } : index === 1 ? { backgroundColor: 'orange' } : 
+              index === 5 ? { backgroundColor: 'orange' } : index === 6 ? { backgroundColor: 'skyblue' } : null
             ]}
           >
             <Image source={bus.image} style={{ width: 50, height: 50, marginRight: 10 }} />
