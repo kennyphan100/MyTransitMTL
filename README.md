@@ -1,7 +1,7 @@
 # SOEN357 - MyTransitMTL
 
 ## Objective
-The objective of this project is to build mobile application that allows public transit commuters to use a virtual OPUS card for their public transport needs using a modern smartphone’s integrated NFC chips.
+The objective of this project is to build a mobile application that allows public transit commuters to use a virtual OPUS card for their public transport needs using a modern smartphone’s integrated NFC chips.
 
 ## Main Features
 - Read your OPUS card into the application
