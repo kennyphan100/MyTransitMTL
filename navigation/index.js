@@ -17,6 +17,7 @@ import Map from '../screens/Map';
 import Settings from '../screens/Settings';
 import AddCard from '../screens/AddCard';
 import CardReading from '../screens/CardReading';
+import ReadOPUSCard from '../screens/ReadOPUSCard';
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -34,6 +35,10 @@ const Navigation = () => {
                   <Drawer.Screen name="Dashboard" component={Dashboard} options={{
                         drawerIcon: config => <Feather name="home" size={24} color="black" />,
                         }}
+                  />
+                  <Drawer.Screen name="Read OPUS Card" component={ReadOPUSCard} options={{
+                        drawerItemStyle: { height: 0 }
+                        }} 
                   />
                   <Drawer.Screen name="Purchase Pass" component={Recharge} options={{
                         drawerIcon: config => <FontAwesome name="ticket" size={24} color="black" />,
