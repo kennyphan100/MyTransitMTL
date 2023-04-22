@@ -1,7 +1,7 @@
 # SOEN357 - MyTransitMTL
 
 ## Description
-This is a prototype of our mobile application MyTransitMTL. Most UI pages from the Figma mockup were implemented. In terms of back-end, the authentication system is completed: a user can create an account and login with it.
+This is a prototype of our mobile application MyTransitMTL. Most UI pages from the Figma mockup were implemented. In terms of back-end, the authentication system is fully complete: a user can create an account and login with it. The application will display a default OPUS card with some transactions on it if they add an opus card.
 
 ## Objective
 The objective of this project is to build a mobile application that allows public transit commuters to use a virtual OPUS card for their public transport needs using a modern smartphone’s integrated NFC chips.
